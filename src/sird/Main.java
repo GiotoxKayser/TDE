@@ -46,13 +46,13 @@ public class Main {
         r.mostrarVetor(cTFIDF);  
         
     }
-    public static void comeco(String pasta) {
+    public static void comeco() {
            Caminhos c = new Caminhos();
         
         String [] bd = {"doc1.txt","doc2.txt","doc3.txt",
                         "doc4.txt","doc5.txt","doc6.txt"};
         
-        pasta = c.getCaminho();
+        String pasta = "C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\";
         //String pasta = "C:\\Users\\PROJETO\\Documents\\SIRD\\src\\doc\\" ;
         String separador = " ";
         

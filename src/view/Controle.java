@@ -155,11 +155,10 @@ public class Controle extends javax.swing.JFrame {
             //CSVFile cv = new CSVFile();
             //cv.abrirArquivoDeLeitura(caminho, nomeArquivo);
             File arquivo = new File(caminho);
-            Main m = new Main();  
             if(arquivo.exists()){
                 if(Desktop.isDesktopSupported()){
                     Desktop.getDesktop().open(arquivo);
-                    m.comeco(caminho);
+
                 }
             }
         }catch(Exception ex){}
@@ -181,11 +180,12 @@ public class Controle extends javax.swing.JFrame {
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void jBtnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecuperarActionPerformed
-        // TODO add your handling code here:
+        Main m = new Main();  
+          m.comeco();
     }//GEN-LAST:event_jBtnRecuperarActionPerformed
 
     private void jBtnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserir1ActionPerformed
-        // TODO add your handling code here:
+        System.out.println("A bunda tua mae");
     }//GEN-LAST:event_jBtnInserir1ActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
