@@ -24,4 +24,5 @@ public class Caminhos {
     public void setNomeArquivo(String nomeArquivo) {
         this.nomeArquivo = nomeArquivo;
     }
+    
 }

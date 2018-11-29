@@ -2,12 +2,25 @@ package view;
 
 import java.io.File;
 import DAO.Caminhos;
+import WriteFiles.WriteFiles;
 import diretorio.CSVFile;
 import java.awt.Desktop;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sird.Main;
+
 public class Controle extends javax.swing.JFrame {
+
     String caminho;
     String nomeArquivo;
+
     /**
      * Creates new form Controle
      */
@@ -33,6 +46,8 @@ public class Controle extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jBtnInserir1 = new javax.swing.JButton();
+        jBtnBuscar = new javax.swing.JButton();
+        Indexar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,29 +118,47 @@ public class Controle extends javax.swing.JFrame {
             }
         });
 
+        jBtnBuscar.setText("Buscar");
+        jBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnBuscarActionPerformed(evt);
+            }
+        });
+
+        Indexar.setText("Indexar");
+        Indexar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IndexarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnRecuperar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBtnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Indexar)
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -134,15 +167,23 @@ public class Controle extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBtnAbrir)
-                            .addComponent(jBtnInserir1)
-                            .addComponent(jBtnRemover)
-                            .addComponent(jBtnRecuperar))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscar))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jBtnAbrir)
+                                    .addComponent(jBtnInserir1)
+                                    .addComponent(jBtnRemover)
+                                    .addComponent(jBtnRecuperar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1)
+                                .addGap(7, 7, 7))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Indexar))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -151,37 +192,38 @@ public class Controle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAbrirActionPerformed
-        try{
+        try {
             //CSVFile cv = new CSVFile();
             //cv.abrirArquivoDeLeitura(caminho, nomeArquivo);
             File arquivo = new File(caminho);
-            if(arquivo.exists()){
-                if(Desktop.isDesktopSupported()){
+            if (arquivo.exists()) {
+                if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(arquivo);
 
                 }
             }
-        }catch(Exception ex){}
-      
-        
+        } catch (Exception ex) {
+        }
+
+
     }//GEN-LAST:event_jBtnAbrirActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-        
-        caminho = jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]" , "").replace(", ", "\\");
+
+        caminho = jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]", "").replace(", ", "\\");
         nomeArquivo = jTree1.getLastSelectedPathComponent().toString();
         jTextField1.setText(caminho);
-        jTextField1.setText(jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]" , "").replace(", ", "\\"));
+        jTextField1.setText(jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]", "").replace(", ", "\\"));
         Caminhos c = new Caminhos();
         c.setCaminho(caminho);
         c.setNomeArquivo(nomeArquivo);
-        
-        
+
+
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void jBtnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecuperarActionPerformed
-        Main m = new Main();  
-          m.comeco();
+        Main m = new Main();
+        m.comeco();
     }//GEN-LAST:event_jBtnRecuperarActionPerformed
 
     private void jBtnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserir1ActionPerformed
@@ -191,8 +233,36 @@ public class Controle extends javax.swing.JFrame {
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
         File file = new File(caminho);
         file.delete();
-        
+
     }//GEN-LAST:event_jBtnRemoverActionPerformed
+
+    private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
+        String cami = jTextField1.getText();
+        try {
+            //CSVFile cv = new CSVFile();
+            //cv.abrirArquivoDeLeitura(caminho, nomeArquivo);
+            File arquivo = new File(cami);
+            if (arquivo.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(arquivo);
+
+                }
+            }
+        } catch (Exception ex) {
+        }
+    }//GEN-LAST:event_jBtnBuscarActionPerformed
+
+    private void IndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IndexarActionPerformed
+       
+        try {
+            
+            WriteFiles fl = new WriteFiles();
+            String Texto =jTextArea1.getText();
+            fl.gravarText(Texto);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_IndexarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,7 +300,9 @@ public class Controle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Indexar;
     private javax.swing.JButton jBtnAbrir;
+    private javax.swing.JButton jBtnBuscar;
     private javax.swing.JButton jBtnInserir1;
     private javax.swing.JButton jBtnRecuperar;
     private javax.swing.JButton jBtnRemover;
