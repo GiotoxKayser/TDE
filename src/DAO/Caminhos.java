@@ -7,14 +7,14 @@ public class Caminhos {
     }
 
     public String getCaminho() {
-        return Caminho;
+        return LaCaminho;
     }
 
    
     public void setCaminho(String Caminho) {
-        this.Caminho = Caminho;
+        this.LaCaminho = Caminho;
     }
-    String Caminho;
+    String LaCaminho;
     String nomeArquivo;
 
     public String getNomeArquivo() {

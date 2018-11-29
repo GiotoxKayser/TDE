@@ -1,7 +1,10 @@
+package view;
 
 import java.io.File;
 import DAO.Caminhos;
 import diretorio.CSVFile;
+import java.awt.Desktop;
+import sird.Main;
 public class Controle extends javax.swing.JFrame {
     String caminho;
     String nomeArquivo;
@@ -41,6 +44,11 @@ public class Controle extends javax.swing.JFrame {
         });
 
         jBtnRemover.setText("Remover");
+        jBtnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnRemoverActionPerformed(evt);
+            }
+        });
 
         jBtnRecuperar.setText("Recuperar");
         jBtnRecuperar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,18 +61,32 @@ public class Controle extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("doc");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc1.txt");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc2.txt");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc3.txt");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc4.txt");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc5.txt");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("doc6.txt");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("C:");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Users");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("gioto");
+        javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Documents");
+        javax.swing.tree.DefaultMutableTreeNode treeNode5 = new javax.swing.tree.DefaultMutableTreeNode("NetBeansProjects");
+        javax.swing.tree.DefaultMutableTreeNode treeNode6 = new javax.swing.tree.DefaultMutableTreeNode("TDE");
+        javax.swing.tree.DefaultMutableTreeNode treeNode7 = new javax.swing.tree.DefaultMutableTreeNode("src");
+        javax.swing.tree.DefaultMutableTreeNode treeNode8 = new javax.swing.tree.DefaultMutableTreeNode("doc");
+        javax.swing.tree.DefaultMutableTreeNode treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc1.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc2.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc3.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc4.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc5.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc6.txt");
+        treeNode8.add(treeNode9);
+        treeNode7.add(treeNode8);
+        treeNode6.add(treeNode7);
+        treeNode5.add(treeNode6);
+        treeNode4.add(treeNode5);
+        treeNode3.add(treeNode4);
+        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,9 +151,19 @@ public class Controle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAbrirActionPerformed
-        Caminhos c = new Caminhos();
-        c.setCaminho(caminho);
-        c.setNomeArquivo(nomeArquivo);
+        try{
+            //CSVFile cv = new CSVFile();
+            //cv.abrirArquivoDeLeitura(caminho, nomeArquivo);
+            File arquivo = new File(caminho);
+            Main m = new Main();  
+            if(arquivo.exists()){
+                if(Desktop.isDesktopSupported()){
+                    Desktop.getDesktop().open(arquivo);
+                    m.comeco(caminho);
+                }
+            }
+        }catch(Exception ex){}
+      
         
     }//GEN-LAST:event_jBtnAbrirActionPerformed
 
@@ -141,6 +173,9 @@ public class Controle extends javax.swing.JFrame {
         nomeArquivo = jTree1.getLastSelectedPathComponent().toString();
         jTextField1.setText(caminho);
         jTextField1.setText(jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]" , "").replace(", ", "\\"));
+        Caminhos c = new Caminhos();
+        c.setCaminho(caminho);
+        c.setNomeArquivo(nomeArquivo);
         
         
     }//GEN-LAST:event_jTree1MouseClicked
@@ -152,6 +187,12 @@ public class Controle extends javax.swing.JFrame {
     private void jBtnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserir1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnInserir1ActionPerformed
+
+    private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        File file = new File(caminho);
+        file.delete();
+        
+    }//GEN-LAST:event_jBtnRemoverActionPerformed
 
     /**
      * @param args the command line arguments
