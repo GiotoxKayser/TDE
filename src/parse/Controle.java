@@ -4,6 +4,7 @@ import DAO.Caminhos;
 import diretorio.CSVFile;
 public class Controle extends javax.swing.JFrame {
     String caminho;
+    String nomeArquivo;
     /**
      * Creates new form Controle
      */
@@ -129,15 +130,17 @@ public class Controle extends javax.swing.JFrame {
 
     private void jBtnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAbrirActionPerformed
         Caminhos c = new Caminhos();
-        
+        c.setCaminho(caminho);
+        c.setNomeArquivo(nomeArquivo);
         
     }//GEN-LAST:event_jBtnAbrirActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         
         caminho = jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]" , "").replace(", ", "\\");
+        nomeArquivo = jTree1.getLastSelectedPathComponent().toString();
         jTextField1.setText(caminho);
-        jTextField1.setText(jTree1.getSelectionPath().toString());
+        jTextField1.setText(jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]" , "").replace(", ", "\\"));
         
         
     }//GEN-LAST:event_jTree1MouseClicked
