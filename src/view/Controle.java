@@ -2,6 +2,7 @@ package view;
 
 import java.io.File;
 import DAO.Caminhos;
+import FileSystemModel.FileSystemModel;
 import WriteFiles.WriteFiles;
 import diretorio.CSVFile;
 import java.awt.Desktop;
@@ -199,7 +200,6 @@ public class Controle extends javax.swing.JFrame {
             if (arquivo.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(arquivo);
-
                 }
             }
         } catch (Exception ex) {
@@ -222,8 +222,33 @@ public class Controle extends javax.swing.JFrame {
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void jBtnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecuperarActionPerformed
-        Main m = new Main();
-        m.comeco();
+        File file = new File("/home/anderson/arquivo.txt");
+        FileInputStream fis = null;
+        String texto = "";
+
+        try {
+            fis = new FileInputStream(file);
+            int content;
+            while ((content = fis.read()) != -1) {
+                texto += (char) content;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        JTextArea textArea = new JTextArea(texto);
+        textArea.setLineWrap(true); //quebra de linha automática
+        add(textArea);
+    
+        
     }//GEN-LAST:event_jBtnRecuperarActionPerformed
 
     private void jBtnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserir1ActionPerformed
@@ -231,8 +256,6 @@ public class Controle extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnInserir1ActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
-        File
-        f.removeTreeModelListener
         File file = new File(caminho);
         file.delete();
 
