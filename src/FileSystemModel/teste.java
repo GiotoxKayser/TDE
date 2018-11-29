@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package FileSystemModel;
 import java.io.*;
-/**
- *
- * @author gioto
- */
+
 public class teste {
     public static void main(String[] args) {
 		File arquivo = new File("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\");

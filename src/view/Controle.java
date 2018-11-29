@@ -231,6 +231,8 @@ public class Controle extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnInserir1ActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        File
+        f.removeTreeModelListener
         File file = new File(caminho);
         file.delete();
 
