@@ -3,6 +3,7 @@ package sird;
 import DAO.Caminhos;
 import dicionario.Dicionario;
 import indexador.Indexador;
+import java.io.File;
 import static java.lang.System.out;
 import recuperador.Recuperador;
 
@@ -48,9 +49,13 @@ public class Main {
     }
     public static void comeco() {
            Caminhos c = new Caminhos();
-        
-        String [] bd = {"doc1.txt","doc2.txt","doc3.txt",
-                        "doc4.txt","doc5.txt","doc6.txt"};
+        File file = new File("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\");
+        File[] arquivos = file.listFiles();   
+        int i;
+        String [] bd = new String[arquivos.length];
+        for (i= 0; i < arquivos.length; i++) {
+            bd[i] = (arquivos[i].getName());
+        }
         
         String pasta = "C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\";
         //String pasta = "C:\\Users\\PROJETO\\Documents\\SIRD\\src\\doc\\" ;

@@ -1,6 +1,7 @@
 package view;
 
 import java.io.File;
+import java.io.FileInputStream;
 import DAO.Caminhos;
 import FileSystemModel.FileSystemModel;
 import WriteFiles.WriteFiles;
@@ -15,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
 import sird.Main;
 
 public class Controle extends javax.swing.JFrame {
@@ -48,7 +50,9 @@ public class Controle extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree();
         jBtnInserir1 = new javax.swing.JButton();
         jBtnBuscar = new javax.swing.JButton();
-        Indexar = new javax.swing.JButton();
+        jBtnIndexar = new javax.swing.JButton();
+        jBtnModificar = new javax.swing.JButton();
+        jBtnExecutar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +101,38 @@ public class Controle extends javax.swing.JFrame {
         treeNode8.add(treeNode9);
         treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc6.txt");
         treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc7.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc8.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc9.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc10.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc11.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc12.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc13.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc14.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc15.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc16.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc17.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc18.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc19.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc20.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc21.txt");
+        treeNode8.add(treeNode9);
+        treeNode9 = new javax.swing.tree.DefaultMutableTreeNode("doc22.txt");
+        treeNode8.add(treeNode9);
         treeNode7.add(treeNode8);
         treeNode6.add(treeNode7);
         treeNode5.add(treeNode6);
@@ -112,7 +148,7 @@ public class Controle extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTree1);
 
-        jBtnInserir1.setText("Inserir");
+        jBtnInserir1.setText("Substituir");
         jBtnInserir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnInserir1ActionPerformed(evt);
@@ -126,10 +162,24 @@ public class Controle extends javax.swing.JFrame {
             }
         });
 
-        Indexar.setText("Indexar");
-        Indexar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnIndexar.setText("Indexar");
+        jBtnIndexar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IndexarActionPerformed(evt);
+                jBtnIndexarActionPerformed(evt);
+            }
+        });
+
+        jBtnModificar.setText("Acrescentar");
+        jBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnModificarActionPerformed(evt);
+            }
+        });
+
+        jBtnExecutar.setText("Consultar");
+        jBtnExecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExecutarActionPerformed(evt);
             }
         });
 
@@ -139,28 +189,29 @@ public class Controle extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnRecuperar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Indexar)
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBtnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnAbrir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jBtnRemover, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnIndexar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnRecuperar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnInserir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBtnExecutar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,20 +222,27 @@ public class Controle extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnBuscar))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jBtnAbrir)
-                                    .addComponent(jBtnInserir1)
-                                    .addComponent(jBtnRemover)
-                                    .addComponent(jBtnRecuperar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(34, 34, 34)
                                 .addComponent(jScrollPane1)
                                 .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Indexar))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnAbrir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBtnExecutar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnInserir1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnRecuperar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnRemover)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnIndexar)
+                                .addGap(12, 12, 12))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -214,15 +272,16 @@ public class Controle extends javax.swing.JFrame {
         nomeArquivo = jTree1.getLastSelectedPathComponent().toString();
         jTextField1.setText(caminho);
         jTextField1.setText(jTree1.getSelectionPath().toString().replaceAll("[\\[\\]]", "").replace(", ", "\\"));
+
         Caminhos c = new Caminhos();
         c.setCaminho(caminho);
         c.setNomeArquivo(nomeArquivo);
-
-
+        String casa = c.getNomeArquivo();
+//        jTextField1.setText(casa);
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void jBtnRecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecuperarActionPerformed
-        File file = new File("/home/anderson/arquivo.txt");
+        File file = new File(caminho);
         FileInputStream fis = null;
         String texto = "";
 
@@ -243,19 +302,63 @@ public class Controle extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-
         JTextArea textArea = new JTextArea(texto);
         textArea.setLineWrap(true); //quebra de linha automática
-        add(textArea);
-    
-        
+        jTextArea1.setText(texto);
+
+
     }//GEN-LAST:event_jBtnRecuperarActionPerformed
 
     private void jBtnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnInserir1ActionPerformed
-        System.out.println("A bunda tua mae");
+        //String cami = jTextField1.getText();
+        File file = new File(caminho);
+        file.delete();
+        String Texto = jTextArea1.getText();
+        try {
+            File arquivo = new File("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\");
+            int aux = 0;
+            File[] arquivos = arquivo.listFiles();
+            if (arquivos != null) {
+                int length = arquivos.length;
+                for (int i = 0; i < length; ++i) {
+                    File f = arquivos[i];
+                    if (f.isFile()) {
+                        aux++;
+                    }
+                }
+
+            }
+            Caminhos c = new Caminhos();
+            FileOutputStream fos;
+
+            fos = new FileOutputStream("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\" + nomeArquivo, true);
+            PrintStream ps = new PrintStream(fos);
+            ps.print(Texto);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("█████████████▀▀▀▀▀▀▀▀▀▀▀▀▀█████████████\n" +
+"████████▀▀░░░░░░░░░░░░░░░░░░░▀▀████████\n" +
+"██████▀░░░░░░░░░░░░░░░░░░░░░░░░░▀██████\n" +
+"█████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█████\n" +
+"████░░░░░▄▄▄▄▄▄▄░░░░░░░░▄▄▄▄▄▄░░░░░████\n" +
+"████░░▄██████████░░░░░░██▀░░░▀██▄░░████\n" +
+"████░░███████████░░░░░░█▄░░▀░░▄██░░████\n" +
+"█████░░▀▀███████░░░██░░░██▄▄▄█▀▀░░█████\n" +
+"██████░░░░░░▄▄▀░░░████░░░▀▄▄░░░░░██████\n" +
+"█████░░░░░█▄░░░░░░▀▀▀▀░░░░░░░█▄░░░█████\n" +
+"█████░░░▀▀█░█▀▄▄▄▄▄▄▄▄▄▄▄▄▄▀██▀▀░░█████\n" +
+"██████░░░░░▀█▄░░█░░█░░░█░░█▄▀░░░░██▀▀▀▀\n" +
+"▀░░░▀██▄░░░░░░▀▀█▄▄█▄▄▄█▄▀▀░░░░▄█▀░░░▄▄\n" +
+"▄▄▄░░░▀▀██▄▄▄▄░░░░░░░░░░░░▄▄▄███░░░▄██▄\n" +
+"██████▄▄░░▀█████▀█████▀██████▀▀░░▄█████\n" +
+"██████████▄░░▀▀█▄░░░░░▄██▀▀▀░▄▄▄███▀▄██\n" +
+"███████████░██░▄██▄▄▄▄█▄░▄░████████░███");
     }//GEN-LAST:event_jBtnInserir1ActionPerformed
 
     private void jBtnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRemoverActionPerformed
+        //String cami = jTextField1.getText();
         File file = new File(caminho);
         file.delete();
 
@@ -277,21 +380,51 @@ public class Controle extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnBuscarActionPerformed
 
-    private void IndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IndexarActionPerformed
-       
+    private void jBtnIndexarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIndexarActionPerformed
         try {
-            
+
             WriteFiles fl = new WriteFiles();
-            String Texto =jTextArea1.getText();
+            String Texto = jTextArea1.getText();
             fl.gravarText(Texto);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_IndexarActionPerformed
+    }//GEN-LAST:event_jBtnIndexarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModificarActionPerformed
+        String Texto = jTextArea1.getText();
+        try {
+            File arquivo = new File("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\");
+            int aux = 0;
+            File[] arquivos = arquivo.listFiles();
+            if (arquivos != null) {
+                int length = arquivos.length;
+                for (int i = 0; i < length; ++i) {
+                    File f = arquivos[i];
+                    if (f.isFile()) {
+                        aux++;
+                    }
+                }
+
+            }
+            Caminhos c = new Caminhos();
+            FileOutputStream fos;
+
+            fos = new FileOutputStream("C:\\Users\\gioto\\Documents\\NetBeansProjects\\TDE\\src\\doc\\" + nomeArquivo, true);
+            PrintStream ps = new PrintStream(fos);
+            ps.print(Texto);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Controle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jBtnModificarActionPerformed
+
+    private void jBtnExecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExecutarActionPerformed
+        Main main = new Main();
+        main.comeco();
+    }//GEN-LAST:event_jBtnExecutarActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -325,10 +458,12 @@ public class Controle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Indexar;
     private javax.swing.JButton jBtnAbrir;
     private javax.swing.JButton jBtnBuscar;
+    private javax.swing.JButton jBtnExecutar;
+    private javax.swing.JButton jBtnIndexar;
     private javax.swing.JButton jBtnInserir1;
+    private javax.swing.JButton jBtnModificar;
     private javax.swing.JButton jBtnRecuperar;
     private javax.swing.JButton jBtnRemover;
     private javax.swing.JScrollPane jScrollPane1;
